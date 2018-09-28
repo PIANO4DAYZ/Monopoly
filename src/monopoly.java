@@ -85,7 +85,8 @@ public class monopoly extends JPanel{
                 System.out.println("time to start the 8th crusade :                                      ^)");
         }
             
-        new boardDraw();
+        boardDraw bd = new boardDraw();
+        bd.addMouseListener(new MonopolyMouseAdapter());
         
         
         
@@ -125,6 +126,14 @@ public class monopoly extends JPanel{
       window.setFont(new Font("Comic Sans", Font.ITALIC, 50));
       window.drawString("COMMMUNISM :)", 290, 500);
        
+      /*boolean game = true;
+      while(game) {
+      
+      
+          
+      }
+      */
+      
     }
         
     
