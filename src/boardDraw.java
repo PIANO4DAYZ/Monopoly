@@ -21,7 +21,7 @@ public class boardDraw extends JFrame {
         
         
         ((Component) graph).setFocusable(true);
-
+        // MonopolyMouseAdapter.
         getContentPane().add(graph);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

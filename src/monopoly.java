@@ -6,15 +6,16 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class monopoly extends JPanel{
+            boolean cl = false;
             private Map<String, Integer> place;
             public monopoly(File f) throws FileNotFoundException {
-        place = new TreeMap<>();
-        Scanner scnr = new Scanner(f);
-        while (scnr.hasNext()) {
+            place = new TreeMap<>();
+            Scanner scnr = new Scanner(f);
+            while (scnr.hasNext()) {
 
             addWord(scnr.next());
 
-        }
+            }
 
     }
      private void addWord(String w) {
@@ -133,7 +134,28 @@ public class monopoly extends JPanel{
           
       }
       */
-      
+        window.setColor(Color.WHITE);
+        window.fillRect(1200, 200, 100, 100);
+        window.setColor(Color.BLACK);
+        window.setFont(new Font("Calibri", Font.BOLD, 52));
+        window.drawString("Roll", 1209, 270);
+        if(cl){
+            window.setColor(Color.GRAY);
+        window.fillRect(1200, 200, 100, 100);
+        System.out.println("wow, you exist");
+        }
+        
+    }
+    
+    public void clicked(Point p) {
+        if(p.x < 1300 && p.x > 1200) {
+        if(p.y < 300 && p.y > 200){
+                cl = true;
+        }
+        }
+        
+        
+        System.out.println("(" + p.x + ", " + p.y + ")");
     }
         
     
@@ -142,6 +164,7 @@ public class monopoly extends JPanel{
         
         
     }
+  
     public void e() {
     
         
@@ -163,6 +186,14 @@ public class monopoly extends JPanel{
                                                                                                                                               
                                                                                                                                              
                                                                                                                                               
+                                                                                                                                              
+                                                                                                                                              
+                                                                                                                                              
+                                                                                                                                              
+                                                                                                                                              
+                                                                                                                                              
+                    
+                                                                                                                                       
                                                                                                                                               
                                                                                                                                               
                                                                                                                                               
