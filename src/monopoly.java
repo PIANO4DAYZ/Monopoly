@@ -3,9 +3,12 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class monopoly extends JPanel{
+public class monopoly extends JPanel implements Runnable {
+            boolean boardOne = true;
             boolean cl = false;
             private Map<String, Integer> place;
             public monopoly(File f) throws FileNotFoundException {
@@ -31,7 +34,7 @@ public class monopoly extends JPanel{
     public static void main(String[] args) throws FileNotFoundException, InterruptedException{
       
 
-        int nop = 0;
+       /* int nop = 0;
         ArrayList<String> names = new ArrayList<>();
         Board board = new Board();
         Scanner p = new Scanner(System.in);
@@ -77,15 +80,13 @@ public class monopoly extends JPanel{
             for(int i = 0; i < nop; i++) {
             String holder = p.next();
             names.add(holder);
-            System.out.println("Processing...");
-            Thread.sleep(1000);
             if(i < (nop - 1)){
                 int oof = (int) (Math.random() * retort.size());
                 System.out.println(retort.get(oof));
             }else
                 System.out.println("time to start the 8th crusade :                                      ^)");
         }
-            
+            */
         boardDraw bd = new boardDraw();
         bd.addMouseListener(new MonopolyMouseAdapter());
         
@@ -106,7 +107,9 @@ public class monopoly extends JPanel{
     }
     
     public void paint(Graphics window) {
+        double start = System.currentTimeMillis();
        
+        if(boardOne){
         BufferedImage image = null;
         try {
             image = ImageIO.read(new File("house.jpg"));
@@ -123,10 +126,11 @@ public class monopoly extends JPanel{
     
       window.drawImage(bored, 100,100,790,740, null);
       //window.drawImage(image, 100, 100, 10, 10, null);
-      
       window.setFont(new Font("Comic Sans", Font.ITALIC, 50));
       window.drawString("COMMMUNISM :)", 290, 500);
-       
+      boardOne = false;
+              
+        }
       /*boolean game = true;
       while(game) {
       
@@ -142,62 +146,35 @@ public class monopoly extends JPanel{
         if(cl){
             window.setColor(Color.GRAY);
         window.fillRect(1200, 200, 100, 100);
-        System.out.println("wow, you exist");
+        window.setColor(Color.BLACK);
+        window.drawString("Roll", 1209, 270);
+        cl = false;
+        }else {
+        window.setColor(Color.WHITE);
+        window.fillRect(1200, 200, 100, 100);
+        window.setColor(Color.BLACK);
+        window.drawString("Roll", 1209, 270);
+        
         }
         
+        double total = System.currentTimeMillis() - start;
+        System.out.printf("%.4f seconds%n", total/1000);
     }
     
     public void clicked(Point p) {
-        if(p.x < 1300 && p.x > 1200) {
-        if(p.y < 300 && p.y > 200){
-                cl = true;
+        if((p.x < 1300 && p.x > 1200) && (p.y < 300 && p.y > 200))       
+        cl = true;
+    }
+   
+    @Override
+    public void run() {
+        while(true) {
+            repaint();
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ex) {
+                System.err.println("Wow you just got cucked");
+            }
         }
-        }
-        
-        
-        System.out.println("(" + p.x + ", " + p.y + ")");
-    }
-        
-    
-    public void paintMoney(Graphics window) {
-    
-        
-        
-    }
-  
-    public void e() {
-    
-        
-    }
-    private Color getRandomColor() {
-        int r = (int) (Math.random() * 256);
-        int g = (int) (Math.random() * 256);
-        int b = (int) (Math.random() * 256);
-        return new Color(r, g, b);
     }
 }
-                                                                                                               
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                             
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                    
-                                                                                                                                       
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                              
-                                                                                                                                   

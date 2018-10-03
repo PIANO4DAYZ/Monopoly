@@ -11,6 +11,11 @@ public class MonopolyMouseAdapter extends MouseAdapter {
     
     System.out.println("Yikes");
     toAlert.clicked(e.getPoint());
+    } 
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        super.mousePressed(e); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
