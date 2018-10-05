@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class monopoly extends JPanel implements Runnable {
+    BufferedImage worm = null;
+            BufferedImage bored = null;
             boolean boardOne = true;
             boolean cl = false;
             private Map<String, Integer> place;
@@ -109,28 +111,22 @@ public class monopoly extends JPanel implements Runnable {
     public void paint(Graphics window) {
         double start = System.currentTimeMillis();
        
-        if(boardOne){
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(new File("house.jpg"));
-        } catch (IOException ex) {
-            System.err.println("sawwe");
-        }
+      if(boardOne){
    
-         BufferedImage bored = null;
+        bored = null;
         try {
-            bored = ImageIO.read(new File("ok.png"));
+            bored = ImageIO.read(new File("crappy board.jpg"));
         } catch (IOException ex) {
             System.err.println("sawwe berd");
         }
-    
-      window.drawImage(bored, 100,100,790,740, null);
-      //window.drawImage(image, 100, 100, 10, 10, null);
-      window.setFont(new Font("Comic Sans", Font.ITALIC, 50));
-      window.drawString("COMMMUNISM :)", 290, 500);
+            try {
+                worm = ImageIO.read(new File("better.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(monopoly.class.getName()).log(Level.SEVERE, null, ex);
+            }
+      
       boardOne = false;
-              
-        }
+      }
       /*boolean game = true;
       while(game) {
       
@@ -138,6 +134,17 @@ public class monopoly extends JPanel implements Runnable {
           
       }
       */
+      
+      
+      window.setFont(new Font("Comic Sans", Font.ITALIC, 50));
+      window.setColor(Color.WHITE);
+      window.drawImage(bored, 100,100,790,740, null);
+      window.fillRect((int) (-Math.random() * 40 + 280), 
+              (int) (-Math.random() * 40 + 460), 
+              (int) (Math.random() * 80 + 420), (int) (Math.random() * 80 + 70));
+      window.setColor(Color.BLACK);
+      window.drawString("COMMMUNISM :)", 290, 500);
+      window.drawImage(worm, 797, 761, 25, 25, null);
         window.setColor(Color.WHITE);
         window.fillRect(1200, 200, 100, 100);
         window.setColor(Color.BLACK);
@@ -148,7 +155,7 @@ public class monopoly extends JPanel implements Runnable {
         window.fillRect(1200, 200, 100, 100);
         window.setColor(Color.BLACK);
         window.drawString("Roll", 1209, 270);
-        cl = false;
+     
         }else {
         window.setColor(Color.WHITE);
         window.fillRect(1200, 200, 100, 100);
@@ -157,15 +164,22 @@ public class monopoly extends JPanel implements Runnable {
         
         }
         
-        double total = System.currentTimeMillis() - start;
-        System.out.printf("%.4f seconds%n", total/1000);
+       // double total = System.currentTimeMillis() - start;
+        //ystem.out.printf("%.4f seconds%n", total/1000);
     }
     
-    public void clicked(Point p) {
-        if((p.x < 1300 && p.x > 1200) && (p.y < 300 && p.y > 200))       
+    public void pressed(Point p) {
+        System.out.println("xPos: " + p.x + " " + "yPos: " + p.y);
+        if((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230))     {
+            
+        
         cl = true;
+        }
     }
-   
+    public void released(Point p) {
+    
+        cl = false;
+    }
     @Override
     public void run() {
         while(true) {
