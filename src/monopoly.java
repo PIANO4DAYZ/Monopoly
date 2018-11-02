@@ -13,9 +13,11 @@ public class monopoly extends JPanel implements Runnable {
             boolean boardOne = true;
             boolean cl = false;
             private Map<String, Integer> place;
-            public monopoly(File f) throws FileNotFoundException {
+            public monopoly(File f) throws FileNotFoundException, IOException {
             place = new TreeMap<>();
             Scanner scnr = new Scanner(f);
+            ArrayList<Image> pieces = new ArrayList<>();
+            pieces.add(ImageIO.read(new File("death.gif")));
             while (scnr.hasNext()) {
 
             addWord(scnr.next());
@@ -169,6 +171,17 @@ public class monopoly extends JPanel implements Runnable {
     }
     
     public void pressed(Point p) {
+        
+           Image god = null;
+        try {
+            god = ImageIO.read(new File("god.jfif"));
+        } catch (IOException ex) {
+            Logger.getLogger(monopoly.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(god, new Point(getX(), 
+           getY()), "god");
+        setCursor(c);
+        
         System.out.println("xPos: " + p.x + " " + "yPos: " + p.y);
         if((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230))     {
             
@@ -177,18 +190,23 @@ public class monopoly extends JPanel implements Runnable {
         }
     }
     public void released(Point p) {
-    
+    setCursor(Cursor.getDefaultCursor());
         cl = false;
     }
     @Override
     public void run() {
+    
+   
         while(true) {
+            
             repaint();
             try {
+                
                 Thread.sleep(50);
             } catch (InterruptedException ex) {
                 System.err.println("Wow you just got cucked");
             }
         }
+         
     }
 }
