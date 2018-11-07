@@ -8,7 +8,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class monopoly extends JPanel implements Runnable {
-    BufferedImage worm = null;
+            BufferedImage put = null;
+            BufferedImage q = null;
+            BufferedImage worm = null;
             BufferedImage bored = null;
             boolean boardOne = true;
             boolean cl = false;
@@ -35,7 +37,7 @@ public class monopoly extends JPanel implements Runnable {
         }
 
     }       
-    public static void main(String[] args) throws FileNotFoundException, InterruptedException{
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException{
       
 
        /* int nop = 0;
@@ -114,10 +116,11 @@ public class monopoly extends JPanel implements Runnable {
         double start = System.currentTimeMillis();
        
       if(boardOne){
-   
-        bored = null;
+        
         try {
+            put = ImageIO.read(new File("why.png"));
             bored = ImageIO.read(new File("crappy board.jpg"));
+            q = ImageIO.read(new File("question.png"));
         } catch (IOException ex) {
             System.err.println("sawwe berd");
         }
@@ -138,15 +141,20 @@ public class monopoly extends JPanel implements Runnable {
       */
       
       
-      window.setFont(new Font("Comic Sans", Font.ITALIC, 50));
-      window.setColor(Color.WHITE);
-      window.drawImage(bored, 100,100,790,740, null);
-      window.fillRect((int) (-Math.random() * 40 + 280), 
+        window.setFont(new Font("Comic Sans", Font.ITALIC, 50));
+        window.setColor(Color.WHITE);
+        window.drawImage(bored, 100,100,790,740, null);
+      /*
+        window.fillRect((int) (-Math.random() * 40 + 280), 
               (int) (-Math.random() * 40 + 460), 
               (int) (Math.random() * 80 + 420), (int) (Math.random() * 80 + 70));
-      window.setColor(Color.BLACK);
-      window.drawString("COMMMUNISM :)", 290, 500);
-      window.drawImage(worm, 797, 761, 25, 25, null);
+*/
+        window.setColor(Color.BLACK);
+      
+        //window.drawString("COMMMUNISM :)", 290, 500);
+        window.drawImage(put, 295, 400, 400, 100, null);
+        window.drawImage(worm, 797, 761, 25, 25, null);
+        window.drawImage(q, 580, 580, 190, 100, null);
         window.setColor(Color.WHITE);
         window.fillRect(1200, 200, 100, 100);
         window.setColor(Color.BLACK);

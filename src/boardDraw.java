@@ -2,17 +2,18 @@ import javax.swing.JFrame;
 import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class boardDraw extends JFrame {
 
     public static final int WIDTH = 1320;
     public static final int HEIGHT = 1020;
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         new boardDraw(); 
     }
 
-    public boardDraw() throws FileNotFoundException {
+    public boardDraw() throws FileNotFoundException, IOException {
         super("game");
 
         setSize(WIDTH, HEIGHT);
