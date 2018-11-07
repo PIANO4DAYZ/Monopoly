@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class monopoly extends JPanel implements Runnable {
+            BufferedImage cc = null;
             BufferedImage put = null;
             BufferedImage q = null;
             BufferedImage worm = null;
@@ -15,28 +16,17 @@ public class monopoly extends JPanel implements Runnable {
             boolean boardOne = true;
             boolean cl = false;
             private Map<String, Integer> place;
-            public monopoly(File f) throws FileNotFoundException, IOException {
+            
+            
+            public monopoly() throws FileNotFoundException, IOException {
             place = new TreeMap<>();
-            Scanner scnr = new Scanner(f);
+           
             ArrayList<Image> pieces = new ArrayList<>();
             pieces.add(ImageIO.read(new File("death.gif")));
-            while (scnr.hasNext()) {
-
-            addWord(scnr.next());
-
-            }
+  
 
     }
-     private void addWord(String w) {
-        String whole = w.toLowerCase();
-
-        if (place.containsKey(whole)) {
-            place.put(whole, place.get(whole) + 1);
-        } else {
-            place.put(whole, 1);
-        }
-
-    }       
+    
     public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException{
       
 
@@ -118,6 +108,8 @@ public class monopoly extends JPanel implements Runnable {
       if(boardOne){
         
         try {
+            
+            cc = ImageIO.read(new File("cc.png"));         
             put = ImageIO.read(new File("why.png"));
             bored = ImageIO.read(new File("crappy board.jpg"));
             q = ImageIO.read(new File("question.png"));
@@ -152,6 +144,7 @@ public class monopoly extends JPanel implements Runnable {
         window.setColor(Color.BLACK);
       
         //window.drawString("COMMMUNISM :)", 290, 500);
+        window.drawImage(cc, 230, 250, 190, 100, null);
         window.drawImage(put, 295, 400, 400, 100, null);
         window.drawImage(worm, 797, 761, 25, 25, null);
         window.drawImage(q, 580, 580, 190, 100, null);

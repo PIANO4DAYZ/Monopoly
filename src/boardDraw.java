@@ -18,7 +18,7 @@ public class boardDraw extends JFrame {
 
         setSize(WIDTH, HEIGHT);
 
-        monopoly graph = new monopoly(new File("src/board.txt"));
+        monopoly graph = new monopoly();
         
         ((Component) graph).setFocusable(true);
         MonopolyMouseAdapter.toAlert = graph;
