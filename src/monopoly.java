@@ -22,7 +22,7 @@ public class monopoly extends JPanel implements Runnable {
             place = new TreeMap<>();
            
             ArrayList<Image> pieces = new ArrayList<>();
-            pieces.add(ImageIO.read(new File("death.gif")));
+         
   
 
     }
@@ -83,6 +83,8 @@ public class monopoly extends JPanel implements Runnable {
                 System.out.println("time to start the 8th crusade :                                      ^)");
         }
             */
+       
+        
         boardDraw bd = new boardDraw();
         bd.addMouseListener(new MonopolyMouseAdapter());
         
@@ -111,17 +113,18 @@ public class monopoly extends JPanel implements Runnable {
             
             cc = ImageIO.read(new File("cc.png"));         
             put = ImageIO.read(new File("why.png"));
-            bored = ImageIO.read(new File("crappy board.jpg"));
+            bored = ImageIO.read(new File("bb.jpg"));
             q = ImageIO.read(new File("question.png"));
         } catch (IOException ex) {
             System.err.println("sawwe berd");
         }
+        /*
             try {
                 worm = ImageIO.read(new File("better.png"));
             } catch (IOException ex) {
                 Logger.getLogger(monopoly.class.getName()).log(Level.SEVERE, null, ex);
             }
-      
+      */
       boardOne = false;
       }
       /*boolean game = true;
@@ -158,13 +161,14 @@ public class monopoly extends JPanel implements Runnable {
         window.fillRect(1200, 200, 100, 100);
         window.setColor(Color.BLACK);
         window.drawString("Roll", 1209, 270);
+
      
         }else {
         window.setColor(Color.WHITE);
         window.fillRect(1200, 200, 100, 100);
         window.setColor(Color.BLACK);
         window.drawString("Roll", 1209, 270);
-        
+      
         }
         
        // double total = System.currentTimeMillis() - start;
@@ -175,7 +179,7 @@ public class monopoly extends JPanel implements Runnable {
         
            Image god = null;
         try {
-            god = ImageIO.read(new File("god.jfif"));
+            god = ImageIO.read(new File("god.png"));
         } catch (IOException ex) {
             Logger.getLogger(monopoly.class.getName()).log(Level.SEVERE, null, ex);
         }
