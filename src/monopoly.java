@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -8,29 +9,27 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class monopoly extends JPanel implements Runnable {
-            BufferedImage cc = null;
-            BufferedImage put = null;
-            BufferedImage q = null;
-            BufferedImage worm = null;
-            BufferedImage bored = null;
-            boolean boardOne = true;
-            boolean cl = false;
-            private Map<String, Integer> place;
-            
-            
-            public monopoly() throws FileNotFoundException, IOException {
-            place = new TreeMap<>();
-           
-            ArrayList<Image> pieces = new ArrayList<>();
-         
-  
+
+    BufferedImage cc = null;
+    BufferedImage put = null;
+    BufferedImage q = null;
+    BufferedImage worm = null;
+    BufferedImage bored = null;
+    boolean boardOne = true;
+    boolean cl = false;
+    private Map<String, Integer> place;
+
+    public monopoly() throws FileNotFoundException, IOException {
+        place = new TreeMap<>();
+
+        ArrayList<Image> pieces = new ArrayList<>();
 
     }
-    
-    public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException{
-      
 
-       /* int nop = 0;
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException, IOException {
+
+
+        /* int nop = 0;
         ArrayList<String> names = new ArrayList<>();
         Board board = new Board();
         Scanner p = new Scanner(System.in);
@@ -82,70 +81,60 @@ public class monopoly extends JPanel implements Runnable {
             }else
                 System.out.println("time to start the 8th crusade :                                      ^)");
         }
-            */
-       
-        
+         */
         boardDraw bd = new boardDraw();
         bd.addMouseListener(new MonopolyMouseAdapter());
         
         
-        
     }
-    
-    public static int dice() {
-        
-            int dice = (int)(Math.random() * 6 + 1);
-            
-            return dice;
-        }
 
     
+
     public void update(Graphics window) {
         paint(window);
     }
-    
+
     public void paint(Graphics window) {
         double start = System.currentTimeMillis();
-       
-      if(boardOne){
-        
-        try {
-            
-            cc = ImageIO.read(new File("cc.png"));         
-            put = ImageIO.read(new File("why.png"));
-            bored = ImageIO.read(new File("bb.jpg"));
-            q = ImageIO.read(new File("question.png"));
-        } catch (IOException ex) {
-            System.err.println("sawwe berd");
-        }
-        /*
+
+        if (boardOne) {
+
+            try {
+
+                cc = ImageIO.read(new File("cc.png"));
+                put = ImageIO.read(new File("why.png"));
+                bored = ImageIO.read(new File("bb.jpg"));
+                q = ImageIO.read(new File("question.png"));
+            } catch (IOException ex) {
+                System.err.println("sawwe berd");
+            }
+            /*
             try {
                 worm = ImageIO.read(new File("better.png"));
             } catch (IOException ex) {
                 Logger.getLogger(monopoly.class.getName()).log(Level.SEVERE, null, ex);
             }
-      */
-      boardOne = false;
-      }
-      /*boolean game = true;
+             */
+            boardOne = false;
+        }
+        /*boolean game = true;
       while(game) {
       
       
           
       }
-      */
-      
-      
+         */
+
         window.setFont(new Font("Comic Sans", Font.ITALIC, 50));
         window.setColor(Color.WHITE);
-        window.drawImage(bored, 100,100,790,740, null);
-      /*
+        window.drawImage(bored, 100, 100, 790, 740, null);
+        /*
         window.fillRect((int) (-Math.random() * 40 + 280), 
               (int) (-Math.random() * 40 + 460), 
               (int) (Math.random() * 80 + 420), (int) (Math.random() * 80 + 70));
-*/
+         */
         window.setColor(Color.BLACK);
-      
+
         //window.drawString("COMMMUNISM :)", 290, 500);
         window.drawImage(cc, 230, 250, 190, 100, null);
         window.drawImage(put, 295, 400, 400, 100, null);
@@ -156,62 +145,64 @@ public class monopoly extends JPanel implements Runnable {
         window.setColor(Color.BLACK);
         window.setFont(new Font("Calibri", Font.BOLD, 52));
         window.drawString("Roll", 1209, 270);
-        if(cl){
+        if (cl) {
             window.setColor(Color.GRAY);
-        window.fillRect(1200, 200, 100, 100);
-        window.setColor(Color.BLACK);
-        window.drawString("Roll", 1209, 270);
+            window.fillRect(1200, 200, 100, 100);
+            window.setColor(Color.BLACK);
+            window.drawString("Roll", 1209, 270);
 
-     
-        }else {
-        window.setColor(Color.WHITE);
-        window.fillRect(1200, 200, 100, 100);
-        window.setColor(Color.BLACK);
-        window.drawString("Roll", 1209, 270);
-      
+        } else {
+            window.setColor(Color.WHITE);
+            window.fillRect(1200, 200, 100, 100);
+            window.setColor(Color.BLACK);
+            window.drawString("Roll", 1209, 270);
+
         }
-        
-       // double total = System.currentTimeMillis() - start;
+
+        // double total = System.currentTimeMillis() - start;
         //ystem.out.printf("%.4f seconds%n", total/1000);
     }
+    public int dice() {
     
+    return (int) (Math.random() * 6 + 1);
+    }
     public void pressed(Point p) {
-        
-           Image god = null;
+
+        Image god = null;
         try {
             god = ImageIO.read(new File("god.png"));
         } catch (IOException ex) {
             Logger.getLogger(monopoly.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(god, new Point(getX(), 
-           getY()), "god");
+        Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(god, new Point(getX(),
+                getY()), "god");
         setCursor(c);
-        
+
         System.out.println("xPos: " + p.x + " " + "yPos: " + p.y);
-        if((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230))     {
-            
-        
-        cl = true;
+        if ((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230)) {
+            System.out.println(dice());    
+            cl = true;
         }
     }
+
     public void released(Point p) {
-    setCursor(Cursor.getDefaultCursor());
+        setCursor(Cursor.getDefaultCursor());
         cl = false;
     }
+
     @Override
     public void run() {
-    
-   
-        while(true) {
-            
+
+        while (true) {
+
             repaint();
             try {
-                
+
                 Thread.sleep(50);
             } catch (InterruptedException ex) {
                 System.err.println("Wow you just got cucked");
             }
         }
-         
+
     }
 }
