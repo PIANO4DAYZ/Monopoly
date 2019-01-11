@@ -15,6 +15,15 @@ public class monopoly extends JPanel implements Runnable {
     BufferedImage q = null;
     BufferedImage worm = null;
     BufferedImage bored = null;
+    BufferedImage d0 = null;
+    BufferedImage d1 = null;
+    BufferedImage d2 = null;
+    BufferedImage d3 = null;
+    BufferedImage d4 = null;
+    BufferedImage d5 = null;
+    BufferedImage d6 = null;
+
+    int dice = 0;
     boolean boardOne = true;
     boolean cl = false;
     private Map<String, Integer> place;
@@ -84,11 +93,8 @@ public class monopoly extends JPanel implements Runnable {
          */
         boardDraw bd = new boardDraw();
         bd.addMouseListener(new MonopolyMouseAdapter());
-        
-        
-    }
 
-    
+    }
 
     public void update(Graphics window) {
         paint(window);
@@ -96,11 +102,21 @@ public class monopoly extends JPanel implements Runnable {
 
     public void paint(Graphics window) {
         double start = System.currentTimeMillis();
+        
+        window.setColor(getBackground());
+        
+        window.fillRect(0, 0, getWidth(), getHeight());
 
         if (boardOne) {
 
             try {
-
+                d0 = ImageIO.read(new File("d0.png"));
+                d1 = ImageIO.read(new File("d1.png"));
+                d2 = ImageIO.read(new File("d2.png"));
+                d3 = ImageIO.read(new File("d3.png"));
+                d4 = ImageIO.read(new File("d4.png"));
+                d5 = ImageIO.read(new File("d5.png"));
+                d6 = ImageIO.read(new File("d6.png"));
                 cc = ImageIO.read(new File("cc.png"));
                 put = ImageIO.read(new File("why.png"));
                 bored = ImageIO.read(new File("bb.jpg"));
@@ -158,29 +174,64 @@ public class monopoly extends JPanel implements Runnable {
             window.drawString("Roll", 1209, 270);
 
         }
-
-        // double total = System.currentTimeMillis() - start;
-        //ystem.out.printf("%.4f seconds%n", total/1000);
+        switch (dice) {
+            case 0:
+                window.drawImage(d0, 982, 374, 200, 200, null);
+                break;
+            case 1:
+                window.drawImage(d1, 982, 374, 200, 200, null);
+                break;
+            // double total = System.currentTimeMillis() - start;
+            //ystem.out.printf("%.4f seconds%n", total/1000);
+            case 2:
+                window.drawImage(d2, 982, 374, 200, 200, null);
+                break;
+            case 3:
+                window.drawImage(d3, 982, 374, 200, 200, null);
+                break;
+            case 4:
+                window.drawImage(d4, 982, 374, 200, 200, null);
+                break;
+            case 5:
+                window.drawImage(d5, 982, 374, 200, 200, null);
+                break;
+            case 6:
+                window.drawImage(d6, 982, 374, 200, 200, null);
+                break;
+            default:
+                break;
+        }
+        window.setColor(getBackground());
+        window.fillRect(982, 600, 500, 110);
+        window.setColor(Color.BLACK);
+        window.drawString("You got " + dice, 982, 700);
     }
+
     public int dice() {
-    
-    return (int) (Math.random() * 6 + 1);
-    }
-    public void pressed(Point p) {
 
-        Image god = null;
+        return (int) (Math.random() * 6 + 1);
+    }
+    
+    static BufferedImage god;
+    
+    static {
+        god = null;
         try {
             god = ImageIO.read(new File("god.png"));
         } catch (IOException ex) {
             Logger.getLogger(monopoly.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void pressed(Point p) {
         Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(god, new Point(getX(),
                 getY()), "god");
         setCursor(c);
 
         System.out.println("xPos: " + p.x + " " + "yPos: " + p.y);
         if ((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230)) {
-            System.out.println(dice());    
+            dice = dice();
+            System.out.println(dice());
             cl = true;
         }
     }
