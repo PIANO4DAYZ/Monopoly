@@ -22,7 +22,7 @@ public class monopoly extends JPanel implements Runnable {
     BufferedImage d4 = null;
     BufferedImage d5 = null;
     BufferedImage d6 = null;
-
+    BufferedImage cigar = null;
     int dice = 0;
     boolean boardOne = true;
     boolean cl = false;
@@ -117,6 +117,7 @@ public class monopoly extends JPanel implements Runnable {
                 d4 = ImageIO.read(new File("d4.png"));
                 d5 = ImageIO.read(new File("d5.png"));
                 d6 = ImageIO.read(new File("d6.png"));
+                cigar = ImageIO.read(new File("cigar revise.png"));
                 cc = ImageIO.read(new File("cc.png"));
                 put = ImageIO.read(new File("why.png"));
                 bored = ImageIO.read(new File("bb.jpg"));
@@ -155,6 +156,7 @@ public class monopoly extends JPanel implements Runnable {
         window.drawImage(cc, 230, 250, 190, 100, null);
         window.drawImage(put, 295, 400, 400, 100, null);
         window.drawImage(worm, 797, 761, 25, 25, null);
+        window.drawImage(cigar, 797, 761, 100, 100, null);
         window.drawImage(q, 580, 580, 190, 100, null);
         window.setColor(Color.WHITE);
         window.fillRect(1200, 200, 100, 100);
