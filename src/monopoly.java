@@ -19,6 +19,22 @@ public class monopoly extends JPanel implements Runnable {
 
     private int dice = 0;
     private boolean cl = false;
+    BufferedImage cc = null;
+    BufferedImage put = null;
+    BufferedImage q = null;
+    BufferedImage worm = null;
+    BufferedImage bored = null;
+    BufferedImage d0 = null;
+    BufferedImage d1 = null;
+    BufferedImage d2 = null;
+    BufferedImage d3 = null;
+    BufferedImage d4 = null;
+    BufferedImage d5 = null;
+    BufferedImage d6 = null;
+    BufferedImage cigar = null;
+    int dice = 0;
+    boolean boardOne = true;
+    boolean cl = false;
     private Map<String, Integer> place;
 
     public monopoly() throws IOException {
@@ -118,6 +134,8 @@ public class monopoly extends JPanel implements Runnable {
         //window.drawString("COMMMUNISM :)", 290, 500);
         window.drawImage(cc, 230, 250, 190, 100, null);
         window.drawImage(put, 295, 400, 400, 100, null);
+        window.drawImage(worm, 797, 761, 25, 25, null);
+        window.drawImage(cigar, 797, 761, 100, 100, null);
         window.drawImage(q, 580, 580, 190, 100, null);
         window.drawImage(piece, 300, 300, 100, 100, null);
         window.setColor(Color.WHITE);
