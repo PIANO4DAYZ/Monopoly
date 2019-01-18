@@ -24,6 +24,17 @@ public class monopoly extends JPanel implements Runnable {
     private Map<String, Integer> place;
 
     public monopoly() throws IOException {
+        ArrayList<Block> board = new ArrayList<>();
+        for(int i = 0; i < 40; i++) {
+        if(i == 0) {
+          
+            
+        board.add(new Block(793, 775, 100, 97));
+       
+        }
+            //ArrayList.add(new Block(, i, WIDTH, HEIGHT, dice));
+        }
+        
         dies = new BufferedImage[7];
         for (int i = 0; i < dies.length; i++) {
             dies[i] = ImageIO.read(new File("d" + i + ".png"));
@@ -100,7 +111,7 @@ public class monopoly extends JPanel implements Runnable {
 //</editor-fold>
         boardDraw bd = new boardDraw();
         bd.addMouseListener(new MonopolyMouseAdapter());
-
+        
     }
 
     @Override
@@ -122,7 +133,7 @@ public class monopoly extends JPanel implements Runnable {
         window.drawImage(cc, 230, 250, 190, 100, null);
         window.drawImage(put, 295, 400, 400, 100, null);
         // window.drawImage(worm, 797, 761, 25, 25, null);
-        window.drawImage(cigar, 797, 761, 100, 100, null);
+        window.drawImage(cigar, 797, 761, 50, 50, null);
         window.drawImage(q, 580, 580, 190, 100, null);
         window.drawImage(piece, 300, 300, 100, 100, null);
         window.setColor(Color.WHITE);
