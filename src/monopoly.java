@@ -17,24 +17,32 @@ public class monopoly extends JPanel implements Runnable {
     private final BufferedImage bored;
     private final BufferedImage[] dies;
     private final BufferedImage cigar;
-
+    private final ArrayList<Block> board = new ArrayList<>();
     private int dice = 0;
     private boolean cl = false;
-    
+
     private Map<String, Integer> place;
 
     public monopoly() throws IOException {
-        ArrayList<Block> board = new ArrayList<>();
-        for(int i = 0; i < 40; i++) {
-        if(i == 0) {
-          
-            
-        board.add(new Block(793, 775, 100, 97));
-       
-        }
+
+        for (int i = 0; i < 11; i++) {
+            int x = 793;
+            int y = 795;
+            if (i == 0) {
+
+                board.add(new Block(793, 775, 100, 97));
+                y = y - 23;
+            } else if (x == 10) {
+                board.add(new Block(107, 774, 30, 94));
+
+            } else {
+
+                board.add(new Block((x - 60), y, 60, 73));
+                x = x - 60;
+            }
             //ArrayList.add(new Block(, i, WIDTH, HEIGHT, dice));
         }
-        
+
         dies = new BufferedImage[7];
         for (int i = 0; i < dies.length; i++) {
             dies[i] = ImageIO.read(new File("d" + i + ".png"));
@@ -111,7 +119,7 @@ public class monopoly extends JPanel implements Runnable {
 //</editor-fold>
         boardDraw bd = new boardDraw();
         bd.addMouseListener(new MonopolyMouseAdapter());
-        
+
     }
 
     @Override
@@ -133,9 +141,9 @@ public class monopoly extends JPanel implements Runnable {
         window.drawImage(cc, 230, 250, 190, 100, null);
         window.drawImage(put, 295, 400, 400, 100, null);
         // window.drawImage(worm, 797, 761, 25, 25, null);
-        window.drawImage(cigar, 797, 761, 50, 50, null);
+        window.drawImage(cigar, 797, 761, 30, 30, null);
         window.drawImage(q, 580, 580, 190, 100, null);
-        window.drawImage(piece, 300, 300, 100, 100, null);
+        //window.drawImage(piece, 300, 300, 100, 100, null);
         window.setColor(Color.WHITE);
         window.fillRect(1200, 200, 100, 100);
         window.setColor(Color.BLACK);
@@ -147,6 +155,9 @@ public class monopoly extends JPanel implements Runnable {
         window.drawString("Roll", 1209, 270);
 
         window.drawImage(dies[dice], 982, 374, 200, 200, null);
+        Block temp = board.get(dice);
+        window.drawImage(cigar, temp.getX(), temp.getY(), temp.getWidth(), temp.getHeight(), null);
+
         window.setColor(getBackground());
         window.fillRect(982, 600, 500, 110);
         window.setColor(Color.BLACK);
@@ -170,14 +181,13 @@ public class monopoly extends JPanel implements Runnable {
     }
 
     public void pressed(Point p) {
-        Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(god, 
+        Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(god,
                 new Point(getX(), getY()), "god");
         setCursor(c);
 
         System.out.println("xPos: " + p.x + " " + "yPos: " + p.y);
         if ((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230)) {
             dice = dice();
-            System.out.println(dice());
             cl = true;
         }
     }
