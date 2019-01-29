@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 public class monopoly extends JPanel implements Runnable {
 
+    private int testTotal = 0;
     private final BufferedImage piece;
     private final BufferedImage cc;
     private final BufferedImage put;
@@ -24,25 +25,57 @@ public class monopoly extends JPanel implements Runnable {
     private Map<String, Integer> place;
 
     public monopoly() throws IOException {
-
+        int x = 793;
+        int y = 795;
         for (int i = 0; i < 11; i++) {
-            int x = 793;
-            int y = 795;
+
             if (i == 0) {
 
                 board.add(new Block(793, 775, 100, 97));
                 y = y - 23;
-            } else if (x == 10) {
+            } else if (i == 10) {
                 board.add(new Block(107, 774, 30, 94));
 
             } else {
 
-                board.add(new Block((x - 60), y, 60, 73));
-                x = x - 60;
+                board.add(new Block((x - 65), y, 60, 73));
+                x = x - 65;
             }
             //ArrayList.add(new Block(, i, WIDTH, HEIGHT, dice));
-        }
+            System.out.println("Block SIZE : " + board.size());
 
+        }
+        x = 107;
+        y = 714;
+        for (int a = 11; a < 21; a++) {
+            if (a == 20) {
+
+                board.add(new Block(108, 133, 100, 100));
+            } else {
+                board.add(new Block(x, y, 73, 60));
+                y = y - 63;
+            }
+        }
+        x = 212;
+        y = 131;
+        for (int b = 21; b < 31; b++) {
+            if (b == 30) {
+
+                board.add(new Block(795, 132, 100, 100));
+            } else {
+
+                board.add(new Block(x, y, 60, 73));
+                x += 65;
+            }
+
+        }
+        x = 817;
+        y = 228;
+        for (int c = 31; c < 40; c++) {
+            board.add(new Block(x, y, 73, 60));
+            y += 60;
+
+        }
         dies = new BufferedImage[7];
         for (int i = 0; i < dies.length; i++) {
             dies[i] = ImageIO.read(new File("d" + i + ".png"));
@@ -141,7 +174,7 @@ public class monopoly extends JPanel implements Runnable {
         window.drawImage(cc, 230, 250, 190, 100, null);
         window.drawImage(put, 295, 400, 400, 100, null);
         // window.drawImage(worm, 797, 761, 25, 25, null);
-        window.drawImage(cigar, 797, 761, 30, 30, null);
+        //window.drawImage(cigar, 797, 761, 30, 30, null);
         window.drawImage(q, 580, 580, 190, 100, null);
         //window.drawImage(piece, 300, 300, 100, 100, null);
         window.setColor(Color.WHITE);
@@ -155,8 +188,12 @@ public class monopoly extends JPanel implements Runnable {
         window.drawString("Roll", 1209, 270);
 
         window.drawImage(dies[dice], 982, 374, 200, 200, null);
-        Block temp = board.get(dice);
-        window.drawImage(cigar, temp.getX(), temp.getY(), temp.getWidth(), temp.getHeight(), null);
+
+        if (testTotal > 39) {
+            testTotal = testTotal%40;
+        }
+        Block temp = board.get(testTotal);
+        window.drawImage(cigar, temp.getX(), temp.getY(), 30, 30, null);
 
         window.setColor(getBackground());
         window.fillRect(982, 600, 500, 110);
@@ -189,6 +226,7 @@ public class monopoly extends JPanel implements Runnable {
         if ((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230)) {
             dice = dice();
             cl = true;
+            testTotal += dice;
         }
     }
 
