@@ -18,8 +18,11 @@ public class monopoly extends JPanel implements Runnable {
     private final BufferedImage bored;
     private final BufferedImage[] dies;
     private final BufferedImage cigar;
+    private boolean twice = false;
     private final ArrayList<Block> board = new ArrayList<>();
+    private int dice2 = 0;
     private int dice = 0;
+    private final Block jel= new Block(138, 773, 72, 70);
     private boolean cl = false;
 
     private Map<String, Integer> place;
@@ -76,7 +79,8 @@ public class monopoly extends JPanel implements Runnable {
             y += 60;
 
         }
-        dies = new BufferedImage[7];
+        board.add(jel);
+        dies = new BufferedImage[13];
         for (int i = 0; i < dies.length; i++) {
             dies[i] = ImageIO.read(new File("d" + i + ".png"));
         }
@@ -187,18 +191,33 @@ public class monopoly extends JPanel implements Runnable {
         window.setColor(Color.BLACK);
         window.drawString("Roll", 1209, 270);
 
-        window.drawImage(dies[dice], 982, 374, 200, 200, null);
-
-        if (testTotal > 39) {
+        window.drawImage(dies[dice + dice2], 982, 374, 200, 200, null);
+        
+        if(testTotal == 40 ){
+        
+            if(twice) {
+            
+            
+            }
+        }
+        if(testTotal == 30) {
+            testTotal = 40;
+        
+        }
+        else if (testTotal > 39 && testTotal != 40) {
             testTotal = testTotal%40;
         }
         Block temp = board.get(testTotal);
         window.drawImage(cigar, temp.getX(), temp.getY(), 30, 30, null);
-
+        
+        if(twice) {
+        
+            window.drawString("yo   mom where my damn MILK AHHHHHHHHHHHHHHHHHHHHHHHHHH", 600, 600);
+        }
         window.setColor(getBackground());
         window.fillRect(982, 600, 500, 110);
         window.setColor(Color.BLACK);
-        window.drawString("You got " + dice, 982, 700);
+        window.drawString("You got " + (dice + dice2), 982, 700);
     }
 
     public int dice() {
@@ -224,9 +243,16 @@ public class monopoly extends JPanel implements Runnable {
 
         System.out.println("xPos: " + p.x + " " + "yPos: " + p.y);
         if ((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230)) {
+            dice2 = dice();
             dice = dice();
+            if(dice2 == dice) {
+            
+                twice = true;
+            }else {
+            twice = false;
+            }
             cl = true;
-            testTotal += dice;
+            testTotal += dice + dice2;
         }
     }
 

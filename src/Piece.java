@@ -4,10 +4,11 @@ import java.awt.image.BufferedImage;
 public class Piece {
     private BufferedImage image = null;
     private int place = -1;
-
+    int timesJ;
     public Piece(int place, BufferedImage image) {
         this.place = place;
         this.image = image;
+        timesJ = 0;
     }
     
     public Piece(int place) {
@@ -37,6 +38,14 @@ public class Piece {
     public int getPlace() {
         return place;
     }
+    public void addJail() {
     
+        timesJ++;
+        
+    }
+    public int getJail() {
     
+        return timesJ;
+        
+    }
 }
