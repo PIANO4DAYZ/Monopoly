@@ -11,7 +11,18 @@ import javax.imageio.ImageIO;
 public class monopoly extends JPanel implements Runnable {
 
     private int testTotal = 0;
+    private int testTotal2 = 0;
+    private int testTotal3 = 0;
+    int pieceCounter = 1;
+    int pX = 793;
+    int pY = 775;
+    int pX2 = 793;
+    int pY2 = 775;
+    int pX3 = 793;
+    int pY3 = 775;
     private final BufferedImage piece;
+    private final BufferedImage piece2;
+    private final BufferedImage piece3;
     private final BufferedImage cc;
     private final BufferedImage put;
     private final BufferedImage q;
@@ -22,7 +33,7 @@ public class monopoly extends JPanel implements Runnable {
     private final ArrayList<Block> board = new ArrayList<>();
     private int dice2 = 0;
     private int dice = 0;
-    private final Block jel= new Block(138, 773, 72, 70);
+    private final Block jel = new Block(138, 773, 72, 70);
     private boolean cl = false;
 
     private Map<String, Integer> place;
@@ -89,6 +100,8 @@ public class monopoly extends JPanel implements Runnable {
         bored = ImageIO.read(new File("bb.jpg"));
         q = ImageIO.read(new File("question.png"));
         piece = ImageIO.read(new File("hell.png"));
+        piece2 = ImageIO.read(new File("egg.png"));
+        piece3 = ImageIO.read(new File("categg.png"));
         cigar = ImageIO.read(new File("cigar revise.png"));
 
         place = new TreeMap<>();
@@ -192,27 +205,36 @@ public class monopoly extends JPanel implements Runnable {
         window.drawString("Roll", 1209, 270);
 
         window.drawImage(dies[dice + dice2], 982, 374, 200, 200, null);
-        
-        if(testTotal == 40 ){
-        
-            if(twice) {
-            
-            
+
+        if (testTotal == 40) {
+
+            if (twice) {
+
             }
         }
-        if(testTotal == 30) {
+        if (testTotal == 30) {
             testTotal = 40;
+
+        } else if (testTotal > 39 && testTotal != 40) {
+            testTotal = testTotal % 40;
+        }
         
-        }
-        else if (testTotal > 39 && testTotal != 40) {
-            testTotal = testTotal%40;
-        }
         Block temp = board.get(testTotal);
-        window.drawImage(cigar, temp.getX(), temp.getY(), 30, 30, null);
+        Block temp2 = board.get(testTotal2);
+        Block temp3 = board.get(testTotal3);
         
-        if(twice) {
+            window.drawImage(cigar, temp.getX(), temp.getY(), 30, 30, null);  
+            window.drawImage(piece2, temp2.getX() + 40, temp2.getY(), 30, 30, null);
+            window.drawImage(piece3, temp3.getX(), temp3.getY() + 40, 30, 30, null);
+       
         
-            window.drawString("yo   mom where my damn MILK AHHHHHHHHHHHHHHHHHHHHHHHHHH", 600, 600);
+        if (pieceCounter > 3) {
+
+            pieceCounter = 1;
+        }
+        if (twice) {
+
+            window.drawString("yo   mom where my hec MILK AHHHHHHHHHHHHHHHHHHHHHHHHHH", 600, 600);
         }
         window.setColor(getBackground());
         window.fillRect(982, 600, 500, 110);
@@ -237,6 +259,7 @@ public class monopoly extends JPanel implements Runnable {
     }
 
     public void pressed(Point p) {
+        pieceCounter++;
         Cursor c = Toolkit.getDefaultToolkit().createCustomCursor(god,
                 new Point(getX(), getY()), "god");
         setCursor(c);
@@ -245,14 +268,19 @@ public class monopoly extends JPanel implements Runnable {
         if ((p.x <= 1310 && p.x >= 1200) && (p.y <= 330 && p.y >= 230)) {
             dice2 = dice();
             dice = dice();
-            if(dice2 == dice) {
-            
+            if (dice2 == dice) {
+
                 twice = true;
-            }else {
-            twice = false;
+            } else {
+                twice = false;
             }
             cl = true;
+            if(pieceCounter == 1)
             testTotal += dice + dice2;
+            if(pieceCounter == 2)
+                testTotal2 += dice + dice2;
+            if(pieceCounter == 3)
+                testTotal3 += dice + dice2;
         }
     }
 
